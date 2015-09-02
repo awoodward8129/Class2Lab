@@ -45,7 +45,7 @@ public class PageGenerator extends HttpServlet {
                     "<table><tr> Awesome Header </tr>"
                             + "<tr><td>Sweet</td><td>Table</td><td>Buildig</td></tr>"
                             + "<tr><td>Fun</td><td>Like</td><td>Whoa</td></tr>"
-                            + "<tr><td>And</td><td>Holy</td><td>Cow</td></tr></table");
+                            + "<tr><td>And</td><td>Holy</td><td>Cow</td></tr></table>");
             out.println("</body>");
             out.println("</html>");
         }
