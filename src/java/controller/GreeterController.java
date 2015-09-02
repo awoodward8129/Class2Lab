@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +19,8 @@ import model.WelcomeService;
  *
  * @author Alex
  */
-@WebServlet(name = "PageGenerator", urlPatterns = {"/pager"})
-public class PageGenerator extends HttpServlet {
+@WebServlet(name = "GreeterController", urlPatterns = {"/greeter"})
+public class GreeterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,24 +34,16 @@ public class PageGenerator extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PageGenerator</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PageGenerator at " + request.getContextPath() + "</h1>");
-            out.println(
-                    "<table><tr> Awesome Header </tr>"
-                            + "<tr><td>Sweet</td><td>Table</td><td>Buildig</td></tr>"
-                            + "<tr><td>Fun</td><td>Like</td><td>Whoa</td></tr>"
-                            + "<tr><td>And</td><td>Holy</td><td>Cow</td></tr></table>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+       
+        WelcomeService service = new WelcomeService();
+        
+         String name = request.getParameter("name");
+        String greeting = service.getGreeting(name);
+        request.setAttribute("greeting", greeting);
+        
+        RequestDispatcher view =
+                request.getRequestDispatcher("/greetingOut.jsp");
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
